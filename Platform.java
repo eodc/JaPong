@@ -11,22 +11,21 @@ import javafx.scene.shape.*;
 public class Platform
 {
     private Rectangle rect;
-    public Platform() {
+    public Platform(double startX) {
         rect = new Rectangle(10, 100, Color.WHITE);
-        rect.setX(5);
+        rect.setX(startX);
     }
     public Rectangle getRect(){
         return rect;
     }
-    public void moveUp(Stage stage) {
-        // TODO: Figure out why the fuck it goes up when its supposed to go down
+    public void moveUp() {
         if (rect.getY() > 0) {
-            rect.setY(rect.getY() + 15);
+            rect.setY(rect.getY() - 10);
         }
     }
     public void moveDown(Stage stage) {
-        if (rect.getY() + 140 < stage.getHeight()) {
-            rect.setY(rect.getY() + 15);
+        if (rect.getY() + 130 < stage.getHeight()) {
+            rect.setY(rect.getY() + 10);
         }
     }
 }

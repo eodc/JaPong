@@ -1,7 +1,8 @@
 import javafx.application.Application;
+import javafx.animation.*;
 import javafx.geometry.*;
 import javafx.scene.*;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.media.*;
@@ -17,27 +18,73 @@ import javafx.event.*;
  */
 public class Main extends Application
 {
+    
+    boolean oneGoUp, oneGoDown, twoGoUp, twoGoDown;
+    
     public void start(Stage stage) throws Exception {
         Group root = new Group();
         Scene scene = new Scene(root, 800, 600, Color.BLACK);
-        Platform player = new Platform();
+        Platform player1 = new Platform(15);
+        Platform player2 = new Platform(scene.getWidth() - 25);
         
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                    case UP: player.moveUp(stage);
-                    break;
-                    case DOWN: player.moveDown(stage);
-                    break;
+            public void handle(KeyEvent ke) {
+                switch (ke.getCode()) {
+                    case W:
+                        oneGoUp = true;
+                        break;
+                    case S:
+                        oneGoDown = true;
+                        break;
+                    case UP:
+                        twoGoUp = true;
+                        break;
+                    case DOWN:
+                        twoGoDown = true;
+                        break;
+                }
+            }
+        });
+        scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent ke) {
+                switch (ke.getCode()) {
+                    case W:
+                        oneGoUp = false;
+                        break;
+                    case S:
+                        oneGoDown = false;
+                        break;
+                    case UP:
+                        twoGoUp = false;
+                        break;
+                    case DOWN:
+                        twoGoDown = false;
+                        break;
                 }
             }
         });
         
-        root.getChildren().add(player.getRect());
+        AnimationTimer timer = new AnimationTimer() {
+            public void handle(long now) {
+                if (oneGoUp)
+                    player1.moveUp();
+                if (oneGoDown)
+                    player1.moveDown(stage);
+                if (twoGoUp)
+                    player2.moveUp();
+                if (twoGoDown)
+                    player2.moveDown(stage);
+            }
+        };
+        timer.start();
+        
+        root.getChildren().add(player1.getRect());
+        root.getChildren().add(player2.getRect());
         stage.setTitle("JaPong");
         stage.setScene(scene);
         stage.show();
     }
+    
     public static void main(String[] args) {
         launch(args);
     }
