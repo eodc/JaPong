@@ -50,15 +50,19 @@ public class Main extends Application
                 switch (ke.getCode()) {
                     case W:
                         oneGoUp = false;
+                        player1.resetVect();
                         break;
                     case S:
                         oneGoDown = false;
+                        player1.resetVect();
                         break;
                     case UP:
                         twoGoUp = false;
+                        player2.resetVect();
                         break;
                     case DOWN:
                         twoGoDown = false;
+                        player2.resetVect();
                         break;
                 }
             }
