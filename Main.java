@@ -20,13 +20,23 @@ public class Main extends Application
 {
     
     boolean oneGoUp, oneGoDown, twoGoUp, twoGoDown;
+    boolean gameStarted;
     
     public void start(Stage stage) throws Exception {
+        
+        // Declare all objects that are visual
         Group root = new Group();
         Scene scene = new Scene(root, 800, 600, Color.BLACK);
         Platform player1 = new Platform(15);
         Platform player2 = new Platform(scene.getWidth() - 25);
+        Ball ball = new Ball();
         
+        // Set controls
+        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent me) {
+                gameStarted = true;
+            }
+        });
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
                 switch (ke.getCode()) {
@@ -50,26 +60,25 @@ public class Main extends Application
                 switch (ke.getCode()) {
                     case W:
                         oneGoUp = false;
-                        player1.resetVect();
                         break;
                     case S:
                         oneGoDown = false;
-                        player1.resetVect();
                         break;
                     case UP:
                         twoGoUp = false;
-                        player2.resetVect();
                         break;
                     case DOWN:
                         twoGoDown = false;
-                        player2.resetVect();
                         break;
                 }
             }
         });
-        
+
+        // Set timer that checks if buttons are pressed and moves platforms if buttons are pressed
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long now) {
+                if (gameStarted)
+                    ball.moveLeft();
                 if (oneGoUp)
                     player1.moveUp();
                 if (oneGoDown)
@@ -81,9 +90,10 @@ public class Main extends Application
             }
         };
         timer.start();
-        
+        // Set window properties
         root.getChildren().add(player1.getRect());
         root.getChildren().add(player2.getRect());
+        root.getChildren().add(ball.getBall());
         stage.setTitle("JaPong");
         stage.setScene(scene);
         stage.show();
