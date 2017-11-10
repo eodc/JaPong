@@ -13,9 +13,13 @@ public class Platform
     private Rectangle rect;
     public final int WIDTH = 10;
     public final int HEIGHT = 100;
+    
+    private Vector velocity;
     public Platform(double startX) {
         rect = new Rectangle(WIDTH, HEIGHT, Color.WHITE);
         rect.setX(startX);
+        
+        velocity = new Vector();
     }
     public Rectangle getRect() {
         return rect;

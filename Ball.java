@@ -11,12 +11,16 @@ import javafx.scene.shape.*;
 public class Ball
 {   
     private Rectangle ball;
+    private Vector velocity;
+    
     public final int WIDTH = 10;
     public final int HEIGHT = 10;
     public Ball() {
         ball = new Rectangle(10, 10, Color.WHITE);
         ball.setX(400);
         ball.setY(300);
+        
+        velocity = new Vector();
     }
     public Rectangle getBall() {
         return ball;

@@ -79,7 +79,6 @@ public class Main extends Application
                     player2.moveUp();
                 if (twoGoDown)
                     player2.moveDown(stage.getHeight());
-                stage.setTitle(String.valueOf(ball.checkCollision(player1)));
             }
         };
         timer.start();
