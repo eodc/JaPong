@@ -1,3 +1,6 @@
+package com.eodc.entities;
+
+import com.eodc.physics.*;
 import javafx.stage.*;
 import javafx.scene.paint.*;
 import javafx.scene.shape.*;

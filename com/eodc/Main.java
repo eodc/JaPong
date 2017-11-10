@@ -1,3 +1,7 @@
+package com.eodc;
+
+import com.eodc.physics.*;
+import com.eodc.entities.*;
 import javafx.application.Application;
 import javafx.animation.*;
 import javafx.geometry.*;

@@ -1,3 +1,4 @@
+package com.eodc.physics;
 
 /**
  * Write a description of class Vector here.

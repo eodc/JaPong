@@ -1,4 +1,6 @@
-import javafx.scene.shape.*;
+package com.eodc.physics;
+
+import com.eodc.entities.*;
 /**
  * Write a description of class PhysicsHandler here.
  *
