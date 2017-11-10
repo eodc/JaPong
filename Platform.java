@@ -36,7 +36,4 @@ public class Platform
             rect.setY(rect.getY() + 10);
         }
     }
-    public double getOccupiedYPixels() {
-        return rect.getY() + HEIGHT;
-    }
 }
