@@ -11,28 +11,18 @@ import javafx.scene.shape.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Ball
+public class Ball extends Entity
 {   
     private Rectangle ball;
-    private Vector velocity;
     
-    public final int WIDTH = 10;
-    public final int HEIGHT = 10;
+    public static final int WIDTH = 10;
+    public static final int HEIGHT = 10;
+    public final int MASS = 5;
     public Ball() {
-        ball = new Rectangle(10, 10, Color.WHITE);
+        super(WIDTH, HEIGHT);
+        ball = getObj();
         ball.setX(400);
         ball.setY(300);
-        
-        velocity = new Vector();
-    }
-    public Rectangle getBall() {
-        return ball;
-    }
-    public double getX() {
-        return ball.getX();
-    }
-    public double getY() {
-        return ball.getY();
     }
     public void moveLeft() {
         ball.setX(ball.getX() - 5);

@@ -27,7 +27,7 @@ public class Main extends Application
     
     public void start(Stage stage) throws Exception {
         
-        // Declare all objects that are visual
+        // Intialize all entities
         Group root = new Group();
         Scene scene = new Scene(root, 800, 600, Color.BLACK);
         Platform player1 = new Platform(15);
@@ -86,10 +86,11 @@ public class Main extends Application
             }
         };
         timer.start();
+        
         // Set window properties
-        root.getChildren().add(player1.getRect());
-        root.getChildren().add(player2.getRect());
-        root.getChildren().add(ball.getBall());
+        root.getChildren().add(player1.getObj());
+        root.getChildren().add(player2.getObj());
+        root.getChildren().add(ball.getObj());
         stage.setTitle("JaPong");
         stage.setScene(scene);
         stage.show();

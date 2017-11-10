@@ -11,36 +11,36 @@ import javafx.scene.shape.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Platform
+public class Platform extends Entity
 {
-    private Rectangle rect;
-    public final int WIDTH = 10;
-    public final int HEIGHT = 100;
     
-    private Vector velocity;
+    public static final int WIDTH = 10;
+    public static final int HEIGHT = 100;
+    
+    private Rectangle plat;
     public Platform(double startX) {
-        rect = new Rectangle(WIDTH, HEIGHT, Color.WHITE);
-        rect.setX(startX);
+        super(WIDTH, HEIGHT);
         
-        velocity = new Vector();
+        plat = getObj();
+        plat.setX(startX);
     }
     public Rectangle getRect() {
-        return rect;
+        return plat;
     }
     public double getX() {
-        return rect.getX();
+        return plat.getX();
     }
     public double getY() {
-        return rect.getY();
+        return plat.getY();
     }
     public void moveUp() {
-        if (rect.getY() > 0) {
-            rect.setY(rect.getY() - 10);
+        if (plat.getY() > 0) {
+            plat.setY(plat.getY() - 10);
         }
     }
     public void moveDown(double stageHeight) {
-        if (rect.getY() + 130 < stageHeight) {
-            rect.setY(rect.getY() + 10);
+        if (plat.getY() + 130 < stageHeight) {
+            plat.setY(plat.getY() + 10);
         }
     }
 }

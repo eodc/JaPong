@@ -14,4 +14,12 @@ public class PhysicsHandler
             && ball.getY() + ball.HEIGHT <= plat.getY() + plat.HEIGHT
             && ball.getX() == plat.getX() + plat.WIDTH;
     }
+    public static double[] calcDeflection(Ball ball, Platform plat) {
+        double[] newVelocity = new double[2];
+        double kinEnergy = 1/2 * ball.MASS * Math.pow(ball.getVelocity(), 2);
+        double finVel = Math.sqrt((2 * kinEnergy) / ball.MASS);
+        
+        
+        return newVelocity;
+    }
 }
