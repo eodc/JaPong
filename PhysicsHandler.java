@@ -7,11 +7,9 @@ import javafx.scene.shape.*;
  */
 public class PhysicsHandler
 {
-    public static boolean hitOtherObject(Ball ball, Platform plat) {
-        boolean result = false;
-        if (ball.getBall().getX() == plat.getRect().getX() + plat.getRect().getWidth()) {
-            result = true;
-        }
-        // TODO: Check if ball y value is the same as the platform y value
+    public static boolean hitObject(Ball ball, Platform plat) {
+        return ball.getY() + ball.HEIGHT >= plat.getY() 
+            && ball.getY() + ball.HEIGHT <= plat.getY() + plat.HEIGHT
+            && ball.getX() == plat.getX() + plat.WIDTH;
     }
 }

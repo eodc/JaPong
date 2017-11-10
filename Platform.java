@@ -11,22 +11,32 @@ import javafx.scene.shape.*;
 public class Platform
 {
     private Rectangle rect;
-    private final int MASS = 10;
+    public final int WIDTH = 10;
+    public final int HEIGHT = 100;
     public Platform(double startX) {
-        rect = new Rectangle(10, 100, Color.WHITE);
+        rect = new Rectangle(WIDTH, HEIGHT, Color.WHITE);
         rect.setX(startX);
     }
     public Rectangle getRect() {
         return rect;
+    }
+    public double getX() {
+        return rect.getX();
+    }
+    public double getY() {
+        return rect.getY();
     }
     public void moveUp() {
         if (rect.getY() > 0) {
             rect.setY(rect.getY() - 10);
         }
     }
-    public void moveDown(Stage stage) {
-        if (rect.getY() + 130 < stage.getHeight()) {
+    public void moveDown(double stageHeight) {
+        if (rect.getY() + 130 < stageHeight) {
             rect.setY(rect.getY() + 10);
         }
+    }
+    public double getOccupiedYPixels() {
+        return rect.getY() + HEIGHT;
     }
 }

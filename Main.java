@@ -20,7 +20,6 @@ public class Main extends Application
 {
     
     boolean oneGoUp, oneGoDown, twoGoUp, twoGoDown;
-    boolean gameStarted;
     
     public void start(Stage stage) throws Exception {
         
@@ -32,11 +31,6 @@ public class Main extends Application
         Ball ball = new Ball();
         
         // Set controls
-        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent me) {
-                gameStarted = true;
-            }
-        });
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
                 switch (ke.getCode()) {
@@ -77,16 +71,15 @@ public class Main extends Application
         // Set timer that checks if buttons are pressed and moves platforms if buttons are pressed
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long now) {
-                if (gameStarted)
-                    ball.moveLeft();
                 if (oneGoUp)
                     player1.moveUp();
                 if (oneGoDown)
-                    player1.moveDown(stage);
+                    player1.moveDown(stage.getHeight());
                 if (twoGoUp)
                     player2.moveUp();
                 if (twoGoDown)
-                    player2.moveDown(stage);
+                    player2.moveDown(stage.getHeight());
+                stage.setTitle(String.valueOf(ball.checkCollision(player1)));
             }
         };
         timer.start();
