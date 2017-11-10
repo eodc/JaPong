@@ -3,6 +3,7 @@
 *.ctxt
 *.bluej
 *.txt
+Icon*
 
 # Windows Crap
 *.ini
