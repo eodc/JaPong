@@ -26,14 +26,23 @@ public class Vector
     public double getAngle() {
         return angle;
     }
+    public void setAngle(double ang) {
+        angle = ang;
+    }
     public void setIComponent(double i) {
         components[0] = i;
         angle = Math.toDegrees(Math.atan(components[1] / i));
-        magnitude = Math.sqrt((i * i) + (components[1] * components[1]));
+        if (i < 0) {
+            angle = 180 + angle;
+        }
+        magnitude = Math.sqrt(i * i + components[1] * components[1]);
     }
     public void setJComponent(double j) {
         components[1] = j;
         angle = Math.toDegrees(Math.atan(j / components[0]));
-        magnitude = Math.sqrt(Math.pow(components[0], 2) + Math.pow(j, 2));
+        if (components[0] < 0) {
+            angle = 180 + angle;
+        }
+        magnitude = Math.sqrt(components[0] * components[0] + j * j);
     }
 }

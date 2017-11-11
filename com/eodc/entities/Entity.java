@@ -57,4 +57,7 @@ public class Entity
     public void setY(double y) {
         obj.setY(y);
     }
+    public void setVectorAngle(double ang) {
+        velocity.setAngle(ang);
+    }
 }

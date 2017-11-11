@@ -85,26 +85,29 @@ public class Main extends Application
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long now) {
                 if (gameStarted) {
-                    ball.moveLeft();
+                    ball.start();
                 }
                 if (oneGoUp)
                     player1.moveUp();
                 if (oneGoDown)
-                    player1.moveDown(stage.getHeight());
+                    player1.moveDown();
                 if (twoGoUp)
                     player2.moveUp();
                 if (twoGoDown)
-                    player2.moveDown(stage.getHeight());
+                    player2.moveDown();
                 if (ball.checkCollision(player1)) {
                     double[] newVelocity = PhysicsHandler.calcDeflection(ball);
                     ball.setXVelocity(newVelocity[0]);
                     ball.setYVelocity(newVelocity[1]);
+                    gameStarted = false;
                 } 
                 if (ball.checkCollision(player2)) {
                     double[] newVelocity = PhysicsHandler.calcDeflection(ball);
                     ball.setXVelocity(newVelocity[0]);
                     ball.setYVelocity(newVelocity[1]);
+                    gameStarted = false;
                 }
+                ball.move();
             }
         };
         timer.start();
