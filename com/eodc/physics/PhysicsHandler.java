@@ -12,23 +12,23 @@ public class PhysicsHandler
     public static boolean hitObject(Ball ball, Platform plat) {
         return ball.getY() + ball.HEIGHT >= plat.getY()
             && ball.getY() + ball.HEIGHT <= plat.getY() + plat.HEIGHT
-            && ball.getX() == plat.getX() + plat.WIDTH;
+            && ball.getX() <= plat.getX() + plat.WIDTH
+            && ball.getX() >= plat.getX();
     }
-    public static double[] calcDeflection(Ball ball) {
-        double[] newVelocity = new double[2];
-        double kinEnergy = 0.5 * ball.MASS * Math.pow(ball.getVelocity(), 2);
-        double finVel = Math.sqrt((2 * kinEnergy) / ball.MASS);
-        /* double newYVelocity = finVel * Math.sin(ball.getVelocityAngle());
-        double newXVelocity = Math.sqrt(kinEnergy * kinEnergy - newYVelocity * newYVelocity); */
-        double newXVelocity;
-        if (ball.getX() < 400) 
-            newXVelocity = 770;
-         else 
-            newXVelocity = -770;
-        double newYVelocity = Math.sqrt(finVel * finVel - newXVelocity - newXVelocity);
-        
-        newVelocity[0] = newXVelocity;
-        newVelocity[1] = newYVelocity;  
+    public static double[] calcDeflection(Ball ball, Platform plat) {
+        double fXVelocity;
+        if (ball.getX() < 400)
+            fXVelocity = 770;
+        else
+            fXVelocity = -770;
+        double pVelocity = Math.sqrt(fXVelocity * fXVelocity + ball.getYVelocity() * ball.getYVelocity());
+        double fKinEnergy = 0.8 * (1/2.0 * ball.MASS * pVelocity * pVelocity);
+        double fVelocity = Math.sqrt(2 * fKinEnergy / ball.MASS) + 100;
+        double fYVelocity = Math.sqrt(fVelocity * fVelocity - fXVelocity * fXVelocity);
+        if (ball.getY() < plat.getY() + plat.HEIGHT / 2)
+            fYVelocity = -fYVelocity;
+            
+        double[] newVelocity = { fXVelocity, fYVelocity };
         return newVelocity;
     }
 }
