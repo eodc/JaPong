@@ -12,8 +12,8 @@ public class PhysicsHandler
     public static boolean hitObject(Ball ball, Platform plat) {
         return ball.getY() + ball.HEIGHT >= plat.getY()
             && ball.getY() + ball.HEIGHT <= plat.getY() + plat.HEIGHT
-            && ball.getX() <= plat.getX() + plat.WIDTH
-            && ball.getX() >= plat.getX();
+            && ball.getX() == plat.getX() + plat.WIDTH ||
+            Math.abs(ball.getX() + ball.HEIGHT - plat.getX()) < 1.15;
     }
     public static double[] calcDeflection(Ball ball, Platform plat) {
         double fXVelocity;
