@@ -45,4 +45,10 @@ public class Vector
         }
         magnitude = Math.sqrt(components[0] * components[0] + j * j);
     }
+    public void reset() {
+        components[0] = 0;
+        components[1] = 0;
+        magnitude = 0;
+        angle = 0;
+    }
 }

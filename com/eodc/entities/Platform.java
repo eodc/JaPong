@@ -19,7 +19,7 @@ public class Platform extends Entity
         }
     }
     public void moveDown() {
-        if (getY() + 130 < 800) {
+        if (getY() + HEIGHT < 600) {
             setY(getY() + 10);
         }
     }

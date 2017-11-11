@@ -86,7 +86,6 @@ public class Main extends Application
             public void handle(long now) {
                 if (gameStarted) {
                     ball.start();
-                    ball.setDeltas();
                 }
                 if (oneGoUp)
                     player1.moveUp();
@@ -97,18 +96,28 @@ public class Main extends Application
                 if (twoGoDown)
                     player2.moveDown();
                 if (ball.checkCollision(player1)) {
-                    double[] newVelocity = PhysicsHandler.calcDeflection(ball, player1);
-                    ball.setXVelocity(newVelocity[0]);
-                    ball.setYVelocity(newVelocity[1]);
-                    ball.setDeltas();
+                    ball.handleCollision(player1);
                     gameStarted = false;
                 } 
                 if (ball.checkCollision(player2)) {
-                    double[] newVelocity = PhysicsHandler.calcDeflection(ball, player2);
-                    ball.setXVelocity(newVelocity[0]);
-                    ball.setYVelocity(newVelocity[1]);
-                    ball.setDeltas();
+                    ball.handleCollision(player2);
                     gameStarted = false;
+                }
+                if (ball.getY() <= ball.MIN_POS) {
+                    ball.stop();
+                    ball.setY(ball.MIN_POS);
+                }
+                if (ball.getY() + ball.HEIGHT >= ball.MAX_Y_POS) {
+                    ball.stop();
+                    ball.setY(ball.MAX_Y_POS - ball.HEIGHT);
+                }
+                if (ball.getX() <= ball.MIN_POS) {
+                    ball.stop();
+                    ball.setX(ball.MIN_POS);
+                }
+                if (ball.getX() + ball.WIDTH >= ball.MAX_X_POS) {
+                    ball.stop();
+                    ball.setX(ball.MAX_X_POS - ball.WIDTH);
                 }
                 ball.move();
             }

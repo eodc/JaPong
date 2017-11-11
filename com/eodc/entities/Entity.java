@@ -60,4 +60,7 @@ public class Entity
     public void setVectorAngle(double ang) {
         velocity.setAngle(ang);
     }
+    public void resetVelocity() {
+        velocity.reset();
+    }
 }
