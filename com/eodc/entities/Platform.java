@@ -13,7 +13,6 @@ import javafx.scene.shape.*;
  */
 public class Platform extends Entity
 {
-    
     public static final int WIDTH = 10;
     public static final int HEIGHT = 100;
     
@@ -23,15 +22,6 @@ public class Platform extends Entity
         
         plat = getObj();
         plat.setX(startX);
-    }
-    public Rectangle getRect() {
-        return plat;
-    }
-    public double getX() {
-        return plat.getX();
-    }
-    public double getY() {
-        return plat.getY();
     }
     public void moveUp() {
         if (plat.getY() > 0) {

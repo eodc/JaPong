@@ -2,6 +2,7 @@ package com.eodc;
 
 import com.eodc.physics.*;
 import com.eodc.entities.*;
+import java.util.Random;
 import javafx.application.Application;
 import javafx.animation.*;
 import javafx.geometry.*;
@@ -24,6 +25,7 @@ public class Main extends Application
 {
     
     boolean oneGoUp, oneGoDown, twoGoUp, twoGoDown;
+    boolean gameStarted;
     
     public void start(Stage stage) throws Exception {
         
@@ -32,9 +34,16 @@ public class Main extends Application
         Scene scene = new Scene(root, 800, 600, Color.BLACK);
         Platform player1 = new Platform(15);
         Platform player2 = new Platform(scene.getWidth() - 25);
+        Random rand = new Random();
         Ball ball = new Ball();
+        ball.setY(rand.nextInt(600) + 1);
         
         // Set controls
+        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent me) {
+                gameStarted = true;
+            }
+        });
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent ke) {
                 switch (ke.getCode()) {
@@ -75,6 +84,9 @@ public class Main extends Application
         // Set timer that checks if buttons are pressed and moves platforms if buttons are pressed
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long now) {
+                if (gameStarted) {
+                    ball.moveLeft();
+                }
                 if (oneGoUp)
                     player1.moveUp();
                 if (oneGoDown)
@@ -83,6 +95,16 @@ public class Main extends Application
                     player2.moveUp();
                 if (twoGoDown)
                     player2.moveDown(stage.getHeight());
+                if (ball.checkCollision(player1)) {
+                    double[] newVelocity = PhysicsHandler.calcDeflection(ball);
+                    ball.setXVelocity(newVelocity[0]);
+                    ball.setYVelocity(newVelocity[1]);
+                } 
+                if (ball.checkCollision(player2)) {
+                    double[] newVelocity = PhysicsHandler.calcDeflection(ball);
+                    ball.setXVelocity(newVelocity[0]);
+                    ball.setYVelocity(newVelocity[1]);
+                }
             }
         };
         timer.start();

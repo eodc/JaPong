@@ -19,6 +19,7 @@ public class Entity
      */
     public Entity(int width, int height) {
         obj = new Rectangle(width, height, Color.WHITE);
+        velocity = new Vector();
     }
     public Rectangle getObj() {
         return obj;
@@ -27,7 +28,10 @@ public class Entity
         return obj.getX();
     }
     public double getY() {
-        return obj.getX();
+        return obj.getY();
+    }
+    public Vector getVect() {
+        return velocity;
     }
     public double getVelocity() {
         return velocity.getMagnitude();
@@ -37,5 +41,20 @@ public class Entity
     }
     public double getYVelocity() {
         return velocity.getComponents()[1];
+    }
+    public double getVelocityAngle() {
+        return velocity.getAngle();
+    }
+    public void setXVelocity(double v) {
+        velocity.setIComponent(v);
+    }
+    public void setYVelocity(double v) {
+        velocity.setJComponent(v);
+    }
+    public void setX(double x) {
+        obj.setX(x);
+    }
+    public void setY(double y) {
+        obj.setY(y);
     }
 }

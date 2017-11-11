@@ -22,12 +22,12 @@ public class Ball extends Entity
         super(WIDTH, HEIGHT);
         ball = getObj();
         ball.setX(400);
-        ball.setY(300);
     }
-    public void moveLeft() {
-        ball.setX(ball.getX() - 5);
+    public void start() {
+        
     }
     public boolean checkCollision(Platform plat) {
         return PhysicsHandler.hitObject(this, plat);
     }
+    
 }
