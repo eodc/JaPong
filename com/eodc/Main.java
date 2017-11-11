@@ -114,6 +114,7 @@ public class Main extends Application
         root.getChildren().add(player2.getObj());
         root.getChildren().add(ball.getObj());
         stage.setTitle("JaPong");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
