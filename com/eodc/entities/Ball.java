@@ -18,11 +18,13 @@ public class Ball extends Entity
     public final int MAX_Y_POS = 600;
     public final int MASS = 2;
 
-    private double deltaX;
-    private double deltaY;
+    private double[] deltas;
+    private double[] distTravelled;
     public Ball() {
         super(WIDTH, HEIGHT);
         this.setX(400);
+        deltas = new double[2];
+        distTravelled = new double[2];
     }
 
     public void start() {
@@ -39,8 +41,8 @@ public class Ball extends Entity
         setDeltas();
     }
 
-    public boolean checkCollision(Platform plat) {
-        return PhysicsHandler.hitObject(this, plat);
+    public boolean checkCollision(Platform plat, int playerNum) {
+        return PhysicsHandler.hitObject(this, plat, playerNum);
     }
 
     public void handleCollision(Platform player) {
@@ -49,19 +51,28 @@ public class Ball extends Entity
         setYVelocity(newVelocity[1]);
         setDeltas();
     }
-
+    public void handleWallCollision() {
+        setYVelocity(-distTravelled[1]);
+        deltas[1] = -deltas[1];
+    }
+    
+    public double[] getDistTravelled() {
+        return distTravelled;
+    }
     public void setDeltas() {
-        deltaX = 1/80.0 * this.getXVelocity();
-        deltaY = 1/80.0 * this.getYVelocity();
+        deltas[0] = 1/80.0 * this.getXVelocity();
+        deltas[1] = 1/80.0 * this.getYVelocity();
     }
-
+    
     public void move() {
-        setX(getX() + deltaX);
-        setXVelocity(getXVelocity() - deltaX);
-        setY(getY() + deltaY);
-        setYVelocity(getYVelocity() - deltaY);
+        setX(getX() + deltas[0]);
+        setXVelocity(getXVelocity() - deltas[0]);
+        distTravelled[0] = distTravelled[0] + deltas[0];
+        setY(getY() + deltas[1]);
+        setYVelocity(getYVelocity() - deltas[1]);
+        distTravelled[1] = distTravelled[1] + deltas[1];
     }
-
+    
     public void stop() {
         resetVelocity();
         setDeltas();

@@ -26,6 +26,8 @@ public class Main extends Application
     
     boolean oneGoUp, oneGoDown, twoGoUp, twoGoDown;
     boolean gameStarted;
+    int p1Score = 0;
+    int p2Score = 0;
     
     public void start(Stage stage) throws Exception {
         
@@ -37,11 +39,13 @@ public class Main extends Application
         Random rand = new Random();
         Ball ball = new Ball();
         ball.setY(rand.nextInt(600) + 1);
-        
+        Button start = new Button("Start Game");
         // Set controls
-        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent me) {
+        start.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
                 gameStarted = true;
+                root.getChildren().add(ball.getObj());
+                root.getChildren().remove(start);
             }
         });
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -95,29 +99,33 @@ public class Main extends Application
                     player2.moveUp();
                 if (twoGoDown)
                     player2.moveDown();
-                if (ball.checkCollision(player1)) {
+                if (ball.checkCollision(player1, 1)) {
+                    ball.setX(player1.getX() + player1.WIDTH);
                     ball.handleCollision(player1);
                     gameStarted = false;
                 } 
-                if (ball.checkCollision(player2)) {
+                if (ball.checkCollision(player2, 2)) {
+                    ball.setX(player2.getX() - ball.WIDTH);
                     ball.handleCollision(player2);
                     gameStarted = false;
                 }
                 if (ball.getY() <= ball.MIN_POS) {
-                    ball.stop();
                     ball.setY(ball.MIN_POS);
+                    ball.handleWallCollision();
                 }
                 if (ball.getY() + ball.HEIGHT >= ball.MAX_Y_POS) {
-                    ball.stop();
                     ball.setY(ball.MAX_Y_POS - ball.HEIGHT);
+                    ball.handleWallCollision();
                 }
                 if (ball.getX() <= ball.MIN_POS) {
-                    ball.stop();
                     ball.setX(ball.MIN_POS);
+                    p2Score++;
+                    ball.stop();
                 }
                 if (ball.getX() + ball.WIDTH >= ball.MAX_X_POS) {
-                    ball.stop();
                     ball.setX(ball.MAX_X_POS - ball.WIDTH);
+                    p1Score++;
+                    ball.stop();
                 }
                 ball.move();
             }
@@ -125,9 +133,7 @@ public class Main extends Application
         timer.start();
         
         // Set window properties
-        root.getChildren().add(player1.getObj());
-        root.getChildren().add(player2.getObj());
-        root.getChildren().add(ball.getObj());
+        root.getChildren().addAll(player1.getObj(), player2.getObj(), start);
         stage.setTitle("JaPong");
         stage.setResizable(false);
         stage.setScene(scene);

@@ -9,11 +9,20 @@ import com.eodc.entities.*;
  */
 public class PhysicsHandler
 {
-    public static boolean hitObject(Ball ball, Platform plat) {
-        return ball.getY() + ball.HEIGHT >= plat.getY()
-            && ball.getY() + ball.HEIGHT <= plat.getY() + plat.HEIGHT
-            && (ball.getX() == plat.getX() + plat.WIDTH ||
-            Math.abs(ball.getX() + ball.HEIGHT - plat.getX()) < 1.15);
+    public static boolean hitObject(Ball ball, Platform plat, int playerNum) {
+        boolean result = false;
+        if (playerNum == 1) {
+            result = ball.getY() + ball.HEIGHT >= plat.getY()
+            && ball.getY() <= plat.getY() + plat.HEIGHT
+            && ball.getX() <= plat.getX()
+            && ball.getX() != 0;
+        } else {
+            result = ball.getY() + ball.HEIGHT >= plat.getY()
+            && ball.getY() <= plat.getY() + plat.HEIGHT
+            && ball.getX() >= plat.getX()
+            && ball.getX() != 800 - ball.WIDTH;
+        }
+        return result;
     }
     public static double[] calcDeflection(Ball ball, Platform plat) {
         double fXVelocity;
@@ -22,8 +31,8 @@ public class PhysicsHandler
         else
             fXVelocity = -770;
         double pVelocity = Math.sqrt(fXVelocity * fXVelocity + ball.getYVelocity() * ball.getYVelocity());
-        double fKinEnergy = 0.8 * (1/2.0 * ball.MASS * pVelocity * pVelocity);
-        double fVelocity = Math.sqrt(2 * fKinEnergy / ball.MASS) + 100;
+        double fKinEnergy = 0.75 * (1/2.0 * ball.MASS * pVelocity * pVelocity);
+        double fVelocity = Math.sqrt(2 * fKinEnergy / ball.MASS) + 110;
         double fYVelocity = Math.sqrt(fVelocity * fVelocity - fXVelocity * fXVelocity);
         if (ball.getY() < plat.getY() + plat.HEIGHT / 2)
             fYVelocity = -fYVelocity;
