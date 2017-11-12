@@ -30,9 +30,6 @@ public class Entity
     public double getY() {
         return obj.getY();
     }
-    public Vector getVect() {
-        return velocity;
-    }
     public double getVelocity() {
         return velocity.getMagnitude();
     }
@@ -41,9 +38,6 @@ public class Entity
     }
     public double getYVelocity() {
         return velocity.getComponents()[1];
-    }
-    public double getVelocityAngle() {
-        return velocity.getAngle();
     }
     public void setXVelocity(double v) {
         velocity.setIComponent(v);
@@ -56,9 +50,6 @@ public class Entity
     }
     public void setY(double y) {
         obj.setY(y);
-    }
-    public void setVectorAngle(double ang) {
-        velocity.setAngle(ang);
     }
     public void resetVelocity() {
         velocity.reset();

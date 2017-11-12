@@ -55,10 +55,6 @@ public class Ball extends Entity
         setYVelocity(-distTravelled[1]);
         deltas[1] = -deltas[1];
     }
-    
-    public double[] getDistTravelled() {
-        return distTravelled;
-    }
     public void setDeltas() {
         deltas[0] = 1/80.0 * this.getXVelocity();
         deltas[1] = 1/80.0 * this.getYVelocity();
