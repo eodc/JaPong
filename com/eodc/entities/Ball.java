@@ -28,14 +28,14 @@ public class Ball extends Entity
     }
 
     public void start() {
-        this.setXVelocity(-400);
+        this.setXVelocity(-770);
         double yVelocity;
         if (this.getY() < 300) {
-            yVelocity = -400 * Math.tan(Math.toRadians(165));
+            yVelocity = getXVelocity() * Math.tan(Math.toRadians(165));
             this.setYVelocity(yVelocity);
         }
-        else if (this.getY() >= 300) {
-            yVelocity = -400 * Math.tan(Math.toRadians(-165));
+        else {
+            yVelocity = getXVelocity() * Math.tan(Math.toRadians(-165));
             this.setYVelocity(yVelocity);
         }
         setDeltas();

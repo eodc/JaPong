@@ -15,12 +15,12 @@ public class Platform extends Entity
     }
     public void moveUp() {
         if (getY() > 0) {
-            setY(getY() - 10);
+            setY(getY() - 7.5);
         }
     }
     public void moveDown() {
         if (getY() + HEIGHT < 600) {
-            setY(getY() + 10);
+            setY(getY() + 7.5);
         }
     }
 }
