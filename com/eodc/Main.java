@@ -31,18 +31,29 @@ public class Main extends Application
 
     public void start(Stage stage) throws Exception {
 
-        // Intialize all entities
+        // Create UI elements
         Group root = new Group();
+        StackPane pane = new StackPane();
+        pane.setPrefSize(800, 600);
+        root.getChildren().add(pane);
+        Button start = new Button("Start Game");
+        pane.getChildren().add(start);
+        pane.setAlignment(start, Pos.CENTER);
         Scene scene = new Scene(root, 800, 600, Color.BLACK);
+        
+        // Create game entities
         Platform player1 = new Platform(15);
         Platform player2 = new Platform(scene.getWidth() - 25);
         Random rand = new Random();
         Ball ball = new Ball();
         ball.setY(rand.nextInt(300) + 1);
         
-        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-            public void handle(MouseEvent me) {
+        // Setup UI Functions
+        start.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
                 gameStarted = true;
+                root.getChildren().add(ball.getObj());
+                pane.getChildren().remove(start);
             }
         });
         // Set controls
@@ -132,7 +143,7 @@ public class Main extends Application
         timer.start();
 
         // Set window properties
-        root.getChildren().addAll(player1.getObj(), player2.getObj(), ball.getObj());
+        root.getChildren().addAll(player1.getObj(), player2.getObj());
         stage.setTitle("JaPong");
         stage.setResizable(false);
         stage.setScene(scene);
