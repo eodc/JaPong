@@ -7,7 +7,7 @@ import java.net.MalformedURLException;
 import java.util.Random;
 import javafx.application.Application;
 import javafx.animation.*;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -180,12 +180,14 @@ public class Main extends Application
         pane.setPrefSize(800, 600);
         pane.getChildren().addAll(start, scoreboard[0], scoreboard[1]);
         pane.setAlignment(start, Pos.CENTER);
-        pane.setAlignment(scoreboard[0], Pos.TOP_LEFT);
-        pane.setAlignment(scoreboard[1], Pos.TOP_RIGHT);
+        pane.setAlignment(scoreboard[0], Pos.TOP_CENTER);
+        pane.setAlignment(scoreboard[1], Pos.TOP_CENTER);
+        pane.setMargin(scoreboard[0], new Insets(8,100,0,0));
+        pane.setMargin(scoreboard[1], new Insets(8,0,0,100));
         
         root.getChildren().addAll(pane);
         
-        stage.setTitle("JaPong");
+        stage.setTitle(String.valueOf(scoreboard[0].getX()));
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
