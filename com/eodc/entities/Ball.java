@@ -2,7 +2,6 @@ package com.eodc.entities;
 
 import com.eodc.physics.*;
 import java.util.Random;
-
 /**
  * Write a description of class Ball here.
  *
@@ -13,8 +12,9 @@ public class Ball extends Entity
 {
     public static final int WIDTH = 10;
     public static final int HEIGHT = 10;
-    public final int MIN_POS = 0;
-    public final int MAX_X_POS = 800;
+    public final int MIN_X_POS = -200;
+    public final int MAX_X_POS = 1000;
+    public final int MIN_Y_POS = 0;
     public final int MAX_Y_POS = 600;
     public final int MASS = 2;
 
@@ -28,7 +28,6 @@ public class Ball extends Entity
     }
 
     public void start() {
-        this.setXVelocity(-770);
         double yVelocity;
         if (this.getY() < 300) {
             yVelocity = getXVelocity() * Math.tan(Math.toRadians(165));
@@ -56,8 +55,8 @@ public class Ball extends Entity
         deltas[1] = -deltas[1];
     }
     public void setDeltas() {
-        deltas[0] = 1/80.0 * this.getXVelocity();
-        deltas[1] = 1/80.0 * this.getYVelocity();
+        deltas[0] = 1/100.0 * this.getXVelocity();
+        deltas[1] = 1/100.0 * this.getYVelocity();
     }
     
     public void move() {
@@ -69,8 +68,18 @@ public class Ball extends Entity
         distTravelled[1] = distTravelled[1] + deltas[1];
     }
     
-    public void stop() {
-        resetVelocity();
-        setDeltas();
+    public void reset(int player) {
+        Random rand = new Random();
+        if (player == 0) {
+            setX(400);
+            setY(rand.nextInt(400) + 1);
+            setXVelocity(-1000);
+            start();
+        } else if (player == 1) {
+            setX(400);
+            setY(rand.nextInt(400) + 1);
+            setXVelocity(1000);
+            start();
+        }
     }
 }
