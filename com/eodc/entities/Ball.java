@@ -39,7 +39,12 @@ public class Ball extends Entity
         }
         setDeltas();
     }
-
+    
+    public double[] getFinalPos() {
+        double finalPos[] = new double[] { getX() + getXVelocity(), getY() + getYVelocity() };
+        return finalPos;
+    }
+    
     public boolean checkCollision(Platform plat, int playerNum) {
         return PhysicsHandler.hitObject(this, plat, playerNum);
     }
@@ -50,11 +55,15 @@ public class Ball extends Entity
         setYVelocity(newVelocity[1]);
         setDeltas();
     }
-    public void handleWallCollision() {
-        setYVelocity(-distTravelled[1]);
+    
+    public void handleWallCollision() 
+    {
+        setYVelocity(-getYVelocity());
         deltas[1] = -deltas[1];
     }
-    public void setDeltas() {
+    
+    public void setDeltas()
+    {
         deltas[0] = 1/100.0 * this.getXVelocity();
         deltas[1] = 1/100.0 * this.getYVelocity();
     }
